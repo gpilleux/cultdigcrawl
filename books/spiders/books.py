@@ -17,8 +17,11 @@ class BooksSpider(scrapy.Spider):
         #iterate over colections
         #for colection_url in response.css("article.product_pod > h3 > a ::attr(href)").extract():
         colection_name = "fondo-sills-y-gallardo"
-        colection_urls = ["http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo", "http://culturadigital.udp.cl/index.php/coleccion/coleccion-elna-von-harpe/", "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon/"]
-        colection_url = "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon/"
+        colection_urls = ["http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo", \
+            "http://culturadigital.udp.cl/index.php/coleccion/coleccion-elna-von-harpe/",\
+                "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon/", \
+                    "http://culturadigital.udp.cl/index.php/coleccion/coleccion-odber-heffer/"]
+        colection_url = colection_urls[2]
         yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
     
     
