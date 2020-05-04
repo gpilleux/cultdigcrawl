@@ -40,7 +40,7 @@ class BooksSpider(scrapy.Spider):
         imgId = "-".join([idSplit[0], idSplit[1]])
         finalImageName = "-".join([imgName, "por", author, colection, imgId])
 
-        yield scrapy.Request(callback=self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
+        yield scrapy.Request(response.urljoin(colection), callback=self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
 
         #return item
     
