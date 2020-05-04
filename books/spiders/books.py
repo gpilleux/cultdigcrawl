@@ -32,7 +32,7 @@ class BooksSpider(scrapy.Spider):
         e = articles[2]
         #for e in articles:
         links = e.css("a::attr(href)").extract()
-        source = links[2]
+        source = links[0]
         print(source)
         imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
 
