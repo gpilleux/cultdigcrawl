@@ -29,7 +29,7 @@ class BooksSpider(scrapy.Spider):
 
         articles = response.css(".Elemento")
         print(len(articles))
-        e = articles[7]
+        e = articles[2]
         #for e in articles:
         links = e.css("a::attr(href)").extract()
         source = links[2]
