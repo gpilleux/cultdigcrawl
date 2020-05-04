@@ -64,7 +64,7 @@ class BooksSpider(scrapy.Spider):
         img_urls.append(response.meta.get('imgLink'))
         item["image_urls"] = img_urls
         item["image_name"] = response.meta.get('finalImageName')
-        return item
+        yield item
 
     def parse_book_page(self, response):
         item = {}
