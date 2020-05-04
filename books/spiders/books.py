@@ -28,7 +28,7 @@ class BooksSpider(scrapy.Spider):
         e = articles[2]
         links = e.css("a::attr(href)").extract()
         source = links[0]
-        imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first())
+        imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
 
         #TODO falta caso cuando no existe author
 
