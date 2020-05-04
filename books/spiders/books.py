@@ -17,7 +17,7 @@ class BooksSpider(scrapy.Spider):
         #for colection_url in response.css("article.product_pod > h3 > a ::attr(href)").extract():
         colection_name = "fondo-sills-y-gallardo"
         colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
-        yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name})
+        yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
 
     def parse_colection(self, response):
         colection = response.meta.get('colection')
@@ -40,13 +40,16 @@ class BooksSpider(scrapy.Spider):
         imgId = "-".join([idSplit[0], idSplit[1]])
         finalImageName = "-".join([imgName, "por", author, colection, imgId])
 
+        yield scrapy.Request(response.urljoin(response.meta.get('colection_url')), callback = self.parse_colection, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
         #yield scrapy.Request(response.urljoin(colection), callback=self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
+        '''
         item = ImageItem()
         img_urls = []
         img_urls.append(imgLink)
         item["image_urls"] = img_urls
         item["image_name"] = finalImageName
         return item
+        '''
     
     def download_img(self, response):
         item = ImageItem()
