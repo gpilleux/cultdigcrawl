@@ -27,6 +27,7 @@ class BooksSpider(scrapy.Spider):
         colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
 
         articles = response.css(".Elemento")
+        print(len(articles))
         #e = articles[7]
         for e in articles:
             links = e.css("a::attr(href)").extract()
