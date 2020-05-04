@@ -11,4 +11,4 @@ ROBOTSTXT_OBEY = True
 HTTPCACHE_ENABLED = True
 
 ITEM_PIPELINES = {'build.lib.books.pipelines.CustomImageNamePipeline': 300}
-IMAGES_STORE = '/home/gpilleux46/crawlers/booksbot/images'
+IMAGES_STORE = '/home/gpilleux46/crawlers/cultdigcrawl/images'
