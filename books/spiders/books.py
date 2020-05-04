@@ -23,8 +23,9 @@ class BooksSpider(scrapy.Spider):
     
     #parse_colection
     def parse(self, response):
-        colection = "fondo-sills-y-gallardo"
         colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
+        
+        colection = "".join(response.css("h1.Archive__title::text").extract_first().split(" "))
 
         articles = response.css(".Elemento")
         print(len(articles))
@@ -48,7 +49,7 @@ class BooksSpider(scrapy.Spider):
         finalImageName = "-".join([imgName, "por", author, colection, imgId])
 
         #yield scrapy.Request(response.urljoin(colection_url), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
-    #yield scrapy.Request(response.urljoin(colection), callback=self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
+        #yield scrapy.Request(response.urljoin(colection), callback=self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
     
         item = ImageItem()
         img_urls = []
