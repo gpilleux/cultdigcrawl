@@ -55,7 +55,7 @@ class BooksSpider(scrapy.Spider):
         print(imgLinkOriginal)
         originalImageName = finalImageName + "-original"
 
-        yield scrapy.Request(response.urljoin(imgLinkOriginal), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': originalImageName})
+        yield scrapy.Request(response.urljoin(imgLinkOriginal), callback = self.download_img, meta={'imgLink': imgLinkOriginal, 'finalImageName': originalImageName})
         '''
         item = ImageItem()
         img_urls = []
