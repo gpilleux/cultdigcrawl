@@ -21,7 +21,7 @@ class BooksSpider(scrapy.Spider):
             "http://culturadigital.udp.cl/index.php/coleccion/coleccion-elna-von-harpe",\
                 "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon", \
                     "http://culturadigital.udp.cl/index.php/coleccion/coleccion-odber-heffer"]
-        colection_url = colection_urls[2]
+        colection_url = "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon"
         yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
     
     
