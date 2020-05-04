@@ -27,25 +27,25 @@ class BooksSpider(scrapy.Spider):
         colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
 
         articles = response.css(".Elemento")
-        e = articles[7]
-        #for e in articles:
-        links = e.css("a::attr(href)").extract()
-        source = links[0]
-        imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
+        #e = articles[7]
+        for e in articles:
+            links = e.css("a::attr(href)").extract()
+            source = links[0]
+            imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
 
-        author = e.css(".Elemento__autor").css("a::text").extract_first()
-        #TODO
-        if author:
-            author = "".join(author.split(" "))
-        else:
-            author = "NoTieneAutor"
-        
-        imgLink = e.css("img::attr(src)").extract_first()
-        idSplit = imgLink.split("/")[-1].split(".")[0].split("-")
-        imgId = "-".join([idSplit[0], idSplit[1]])
-        finalImageName = "-".join([imgName, "por", author, colection, imgId])
+            author = e.css(".Elemento__autor").css("a::text").extract_first()
+            #TODO
+            if author:
+                author = "".join(author.split(" "))
+            else:
+                author = "NoTieneAutor"
+            
+            imgLink = e.css("img::attr(src)").extract_first()
+            idSplit = imgLink.split("/")[-1].split(".")[0].split("-")
+            imgId = "-".join([idSplit[0], idSplit[1]])
+            finalImageName = "-".join([imgName, "por", author, colection, imgId])
 
-        yield scrapy.Request(response.urljoin(colection_url), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
+            yield scrapy.Request(response.urljoin(colection_url), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
         #yield scrapy.Request(response.urljoin(colection), callback=self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
         '''
         item = ImageItem()
