@@ -32,9 +32,9 @@ class BooksSpider(scrapy.Spider):
 
         #TODO falta caso cuando no existe author
 
-        author = "".join(e.css(".Elemento__autor").css("a::text").extract_first().split(" "))
+        author = e.css(".Elemento__autor").css("a::text").extract_first()
         #TODO
-        if not author: author = "NoTieneAutor"
+        if author: author = "".join(author.split(" ")) else author = "NoTieneAutor"
         imgLink = e.css("img::attr(src)").extract_first()
         idSplit = imgLink.split("/")[-1].split(".")[0].split("-")
         imgId = "-".join([idSplit[0], idSplit[1]])
