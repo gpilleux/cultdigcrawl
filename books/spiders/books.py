@@ -44,12 +44,13 @@ class BooksSpider(scrapy.Spider):
             author = "NoTieneAutor"
         
         imgLink = e.css("img::attr(src)").extract_first()
+        print(imgLink)
         idSplit = imgLink.split("/")[-1].split(".")[0].split("-")
         imgId = "-".join([idSplit[0], idSplit[1]]).split("x")[1]
         finalImageName = "-".join([imgName, "por", author, colection, imgId])
         originalImageName = finalImageName + "-original"
 
-        yield scrapy.Request(response.urljoin(source), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': originalImageName})
+        yield scrapy.Request(response.urljoin(imgLink), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': originalImageName})
     
         item = ImageItem()
         img_urls = []
