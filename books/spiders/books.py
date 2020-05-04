@@ -17,7 +17,8 @@ class BooksSpider(scrapy.Spider):
         #iterate over colections
         #for colection_url in response.css("article.product_pod > h3 > a ::attr(href)").extract():
         colection_name = "fondo-sills-y-gallardo"
-        colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
+        #colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
+        colection_url = "http://culturadigital.udp.cl/index.php/coleccion/coleccion-elna-von-harpe/"
         yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
     
     
@@ -29,34 +30,34 @@ class BooksSpider(scrapy.Spider):
 
         articles = response.css(".Elemento")
         print(len(articles))
-        #e = articles[2]
-        for e in articles:
-            links = e.css("a::attr(href)").extract()
-            source = links[0]
-            print(source)
-            imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
+        e = articles[2]
+        #for e in articles:
+        links = e.css("a::attr(href)").extract()
+        source = links[0]
+        print(source)
+        imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
 
-            author = e.css(".Elemento__autor").css("a::text").extract_first()
-            if author:
-                author = "".join(author.split(" "))
-            else:
-                author = "NoTieneAutor"
-            
-            imgLink = e.css("img::attr(src)").extract_first()
-            print(imgLink)
-            idSplit = imgLink.split("/")[-1].split(".")[0].split("-")
-            ximgId = "-".join([idSplit[0], idSplit[1]])
-            imgId = ximgId.split("x")[1]
-            print(ximgId)
-            print(imgId)
-            finalImageName = colection + "/" + "-".join([imgName, "por", author, colection, imgId])
+        author = e.css(".Elemento__autor").css("a::text").extract_first()
+        if author:
+            author = "".join(author.split(" "))
+        else:
+            author = "NoTieneAutor"
+        
+        imgLink = e.css("img::attr(src)").extract_first()
+        print(imgLink)
+        idSplit = imgLink.split("/")[-1].split(".")[0].split("-")
+        ximgId = "-".join([idSplit[0], idSplit[1]])
+        imgId = ximgId.split("x")[1]
+        print(ximgId)
+        print(imgId)
+        finalImageName = colection + "/" + "-".join([imgName, "por", author, colection, imgId])
 
-            imgLinkOriginal = imgLink.split(ximgId)[0] + imgId + ".jpg"
-            print(imgLinkOriginal)
-            originalImageName = finalImageName + "-original"
+        imgLinkOriginal = imgLink.split(ximgId)[0] + imgId + ".jpg"
+        print(imgLinkOriginal)
+        originalImageName = finalImageName + "-original"
 
-            yield scrapy.Request(response.urljoin(imgLink), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
-            yield scrapy.Request(response.urljoin(imgLinkOriginal), callback = self.download_img, meta={'imgLink': imgLinkOriginal, 'finalImageName': originalImageName})
+        yield scrapy.Request(response.urljoin(imgLink), callback = self.download_img, meta={'imgLink': imgLink, 'finalImageName': finalImageName})
+        yield scrapy.Request(response.urljoin(imgLinkOriginal), callback = self.download_img, meta={'imgLink': imgLinkOriginal, 'finalImageName': originalImageName})
         '''
         item = ImageItem()
         img_urls = []
