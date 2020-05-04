@@ -25,12 +25,11 @@ class BooksSpider(scrapy.Spider):
 
         colection = response.meta.get('colection')
         articles = response.css(".Elemento")
-        e = articles[2]
+        e = articles[7]
+        #for e in articles:
         links = e.css("a::attr(href)").extract()
         source = links[0]
         imgName = "".join(e.css("h2.Elemento__title").css("a::text").extract_first().split(" "))
-
-        #TODO falta caso cuando no existe author
 
         author = e.css(".Elemento__autor").css("a::text").extract_first()
         #TODO
@@ -48,7 +47,7 @@ class BooksSpider(scrapy.Spider):
         item["image_urls"] = img_urls
         item["image_name"] = finalImageName 
 
-        return item
+        #return item
         
 
     def parse_book_page(self, response):
