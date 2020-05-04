@@ -9,9 +9,9 @@ class ImageItem(scrapy.Item):
 class BooksSpider(scrapy.Spider):
     name = "books"
     allowed_domains = ["culturadigital.udp.cl"]
-    start_urls = ['http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo/']
+    start_urls = ['http://culturadigital.udp.cl']
 
-    '''
+    
     def parse(self, response):
         #Get colections
         #iterate over colections
@@ -19,11 +19,11 @@ class BooksSpider(scrapy.Spider):
         colection_name = "fondo-sills-y-gallardo"
         colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
         yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
-    '''
+    
     
     #parse_colection
-    def parse(self, response):
-        colection_url = "http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
+    def parse_colection(self, response):
+        #colection_url = response.meta.get('colection_url') #"http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo"
         
         colection = "".join(response.css("h1.Archive__title::text").extract_first().split(" "))
 
