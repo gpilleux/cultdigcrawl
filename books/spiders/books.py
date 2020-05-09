@@ -43,10 +43,11 @@ class BooksSpider(scrapy.Spider):
                                                                             "http://culturadigital.udp.cl/index.php/coleccion/enrique-lihn/", \
                                                                                 "http://culturadigital.udp.cl/index.php/coleccion/revista-trama/"]
         
-        for colection_url in colection_urls:
+        #for colection_url in colection_urls:
             #print(l)
             #colection_url = colection_urls[3]
-            yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
+            #yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection)
+        yield scrapy.Request(response.urljoin(colection_url[0]), callback = self.parse_colection)
     
     
     #parse_colection
