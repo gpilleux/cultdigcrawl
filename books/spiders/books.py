@@ -17,12 +17,36 @@ class BooksSpider(scrapy.Spider):
         #iterate over colections
         #for colection_url in response.css("article.product_pod > h3 > a ::attr(href)").extract():
         colection_name = "fondo-sills-y-gallardo"
+        '''
         colection_urls = ["http://culturadigital.udp.cl/index.php/coleccion/fondo-sills-y-gallardo", \
             "http://culturadigital.udp.cl/index.php/coleccion/coleccion-elna-von-harpe",\
                 "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon", \
                     "http://culturadigital.udp.cl/index.php/coleccion/coleccion-odber-heffer"]
-        colection_url = colection_urls[3]
-        yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
+        '''
+        colection_urls = ["http://culturadigital.udp.cl/index.php/coleccion/fondo-sady-zanartu/", \
+            "http://culturadigital.udp.cl/index.php/coleccion/fondo-alfredo-molina-la-hitte/", \
+                "http://culturadigital.udp.cl/index.php/coleccion/coleccion-simon-romero/", \
+                    "http://culturadigital.udp.cl/index.php/coleccion/fondo-enrique-mora/", \
+                        "http://culturadigital.udp.cl/index.php/coleccion/fondo-corporacion-de-reconstruccion-y-auxilio/", \
+                            "http://culturadigital.udp.cl/index.php/coleccion/coleccion-historias-del-barrio/", \
+                                "http://culturadigital.udp.cl/index.php/coleccion/coleccion-fernando-bley/", \
+                                    "http://culturadigital.udp.cl/index.php/coleccion/coleccion-alfonso-calderon/", \
+                                        "http://culturadigital.udp.cl/index.php/coleccion/fondo-julio-bustamante/", \
+                                            "http://culturadigital.udp.cl/index.php/coleccion/coleccion-de-extractos-de-filiacion-y-antecedentes-penales/", \
+                                                "http://culturadigital.udp.cl/index.php/coleccion/coleccion-joaquin-edwards-bello/", \
+                                                    "http://culturadigital.udp.cl/index.php/coleccion/fondo-ricardo-larrain-bravo/", \
+                                                        "http://culturadigital.udp.cl/index.php/coleccion/coleccion-rolando-calderon/", \
+                                                            "http://culturadigital.udp.cl/index.php/coleccion/coleccion-roberto-bolano/", \
+                                                                "http://culturadigital.udp.cl/index.php/coleccion/coleccion-diario-la-nacion/", \
+                                                                    "http://culturadigital.udp.cl/index.php/coleccion/revista-memo/", \
+                                                                        "http://culturadigital.udp.cl/index.php/coleccion/revista-180/", \
+                                                                            "http://culturadigital.udp.cl/index.php/coleccion/enrique-lihn/", \
+                                                                                "http://culturadigital.udp.cl/index.php/coleccion/revista-trama/"]
+        
+        for l in colection_urls:
+            print(l)
+        #colection_url = colection_urls[3]
+        #yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection, meta={'colection': colection_name, 'colection_url': colection_url})
     
     
     #parse_colection
