@@ -47,7 +47,7 @@ class BooksSpider(scrapy.Spider):
             #print(l)
             #colection_url = colection_urls[3]
             #yield scrapy.Request(response.urljoin(colection_url), callback = self.parse_colection)
-        yield scrapy.Request(response.urljoin(colection_url[0]), callback = self.parse_colection)
+        yield scrapy.Request(response.urljoin(colection_urls[0]), callback = self.parse_colection)
     
     
     #parse_colection
